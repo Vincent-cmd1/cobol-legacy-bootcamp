@@ -10,7 +10,7 @@ Ce dépôt contient l’ensemble de mes programmes créés, testés (et parfois 
 
 Voici la liste des programmes présents (ou à venir), avec une courte description pour chacun :
 
-### ✅ `cobolatrice.cbl`
+### ✅ `COBOL.cbl` ou `La cobolatrice`
 > Ma *calculatrice interactive COBOL* à interface ASCII.  
 Elle accepte les opérations de base (`+`, `-`, `*`, `/`), gère les décimales, les signes négatifs, et affiche des messages sarcastiques façon GLaDOS.  
 Bonus : elle ne vous laisse **jamais** vraiment quitter le programme...
