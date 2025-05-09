@@ -2,31 +2,31 @@
 
 ### Mardi 29 Avril
 
-- [ ] Réfléchir aux cas où les conditions peuvent être utiles dans des programmes réels
+- [x] Réfléchir aux cas où les conditions peuvent être utiles dans des programmes réels
 
 #### Introduction aux boucles en COBOL
 
-- [ ] Comprendre la boucle PERFORM
-  - [ ] PERFORM n TIMES : exécution un nombre fixe de fois
-  - [ ] PERFORM UNTIL : boucle avec condition d’arrêt
-  - [ ] PERFORM VARYING : boucle avec compteur
-- [ ] Différence entre boucles contrôlées par un compteur et par une condition
+- [x] Comprendre la boucle PERFORM
+  - [x] PERFORM n TIMES : exécution un nombre fixe de fois
+  - [x] PERFORM UNTIL : boucle avec condition d’arrêt
+  - [x] PERFORM VARYING : boucle avec compteur
+- [x] Différence entre boucles contrôlées par un compteur et par une condition
 
 #### Exercices pratiques
 
-- [ ] Créer un programme qui affiche "Bonjour" 5 fois
-  - [ ] Utiliser PERFORM 5 TIMES
-- [ ] Créer un programme qui compte de 1 à 10 et affiche chaque nombre
-  - [ ] Utiliser PERFORM VARYING
-- [ ] Créer un programme qui demande un nombre et s’arrête quand l’utilisateur entre 0
-  - [ ] Utiliser PERFORM UNTIL
-- [ ] Crée un programme qui affiche tous les multiples de 3 entre 1 et 100, en vérifiant à chaque itération si le nombre est divisible par 3.
-- [ ] Crée un programme qui demande à l'utilisateur un nombre et affiche sa table de multiplication (de 1 à 10).
-- [ ] Crée un programme qui demande à l'utilisateur d'entrer une série de nombres. La boucle continue jusqu'à ce que l'utilisateur entre 0. Le programme doit afficher le plus grand nombre parmi les entrées.
+- [x] Créer un programme qui affiche "Bonjour" 5 fois
+  - [x] Utiliser PERFORM 5 TIMES
+- [x] Créer un programme qui compte de 1 à 10 et affiche chaque nombre
+  - [x] Utiliser PERFORM VARYING
+- [x] Créer un programme qui demande un nombre et s’arrête quand l’utilisateur entre 0
+  - [x] Utiliser PERFORM UNTIL
+- [x] Crée un programme qui affiche tous les multiples de 3 entre 1 et 100, en vérifiant à chaque itération si le nombre est divisible par 3.
+- [x] Crée un programme qui demande à l'utilisateur un nombre et affiche sa table de multiplication (de 1 à 10).
+- [x] Crée un programme qui demande à l'utilisateur d'entrer une série de nombres. La boucle continue jusqu'à ce que l'utilisateur entre 0. Le programme doit afficher le plus grand nombre parmi les entrées.
 
 
 
-- [ ] **(Bonus)** Créer un programme qui permet à l'utilisateur de gérer une todo liste avec les fonctionnalités suivantes :
+- [x] **(Bonus)** Créer un programme qui permet à l'utilisateur de gérer une todo liste avec les fonctionnalités suivantes :
     - Ajouter une tâche.
     - Afficher les tâches.
     - Supprimer une tâche.
@@ -42,5 +42,5 @@
   - Quitter : Quitter le programme.
 #### Consolidation
 
-- [ ] Ajouter une section "Boucles" à sa cheat sheet Markdown
-- [ ] Noter les différences entre les types de PERFORM avec des exemples
+- [x] Ajouter une section "Boucles" à sa cheat sheet Markdown
+- [x] Noter les différences entre les types de PERFORM avec des exemples
