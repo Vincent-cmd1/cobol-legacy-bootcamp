@@ -81,12 +81,7 @@
                      UNTIL WS-IDX-NOTE > WS-COMPT-TB
 
                DISPLAY "Note : " WS-NOTE(WS-IDX-NOTE)
-                       " le " WS-DATE-JJ(WS-IDX-NOTE)
-                              "/" WS-DATE-MM(WS-IDX-NOTE)
-                              "/" WS-DATE-AAAA(WS-IDX-NOTE)
-
+                       " le " WS-DATES(WS-IDX-NOTE)
            END-PERFORM.
 
            STOP RUN.
-
-       
