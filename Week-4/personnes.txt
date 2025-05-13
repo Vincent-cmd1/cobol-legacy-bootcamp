@@ -1,0 +1,10 @@
+DUPONT         Jean           05121990
+MARTIN         Claire         11231985
+DURAND         Paul           07052000
+LEROY          Sophie         03101992
+MOREAU         Marc           08241988
+ROUSSEL        Julie          12121995
+FONTAINE       Luc            04151993
+GARNIER        Alice          06181987
+BERTRAND       Hugo           10101991
+BONNET         Emma           02282001
