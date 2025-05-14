@@ -1,16 +1,17 @@
       *****************************************************************
-      * PROGRAMME : GENS.CBL                                         *
+      * PROGRAMME : gens-w-revers.cbl                                         *
       * AUTEUR    : Vincent-Cmd1                                     *
       * DATE      : 2025-05-14                                       *
       * OBJET     : Lire un fichier texte contenant 10 lignes de     *
       *             noms/prénoms et les stocker en mémoire pour      *
       *             affichage formaté à l'écran, puis écriture dans  *
-      *             un fichier de sortie.                            *
+      *             un fichier de sortie en ordre inversé.           *
       * FORMAT    : Le fichier "gens.txt" est séquentiel, chaque     *
       *             ligne contient un prénom (12 caractères)         *
       *             suivi d’un nom (17 caractères).                  *
-      * REMARQUE  : Traitement linéaire sans contrôle qualité        *
-      *             (fichier supposé correct et complet).            *
+      * SORTIE    : Un fichier "gens-write-reverse.txt" contenant    *
+      *             les lignes dans l’ordre inverse de la lecture.   *
+      * REMARQUE  : Fichier supposé propre (pas de contrôle).        *
       *****************************************************************
 
        IDENTIFICATION DIVISION.
@@ -21,24 +22,24 @@
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
 
-      * Déclaration du fichier source contenant les noms/prénoms
+      * Déclaration du fichier d’entrée (prénoms + noms)
            SELECT FICHIER-GENS ASSIGN TO "gens.txt"
                ORGANIZATION IS LINE SEQUENTIAL.
 
-      * Déclaration du fichier de sortie texte avec les données copiées
+      * Déclaration du fichier de sortie (ordre inversé)
            SELECT FICHIER-GENS-WRITE ASSIGN TO "gens-write-reverse.txt"
                ORGANIZATION IS LINE SEQUENTIAL.     
 
        DATA DIVISION.
        FILE SECTION.
 
-      * Description du fichier d’entrée
+      * Description de l’enregistrement d’entrée
        FD FICHIER-GENS.
        01 FS-ENR-GENS.
            05 FS-PRENOM              PIC X(12).
            05 FS-NOM                 PIC X(17).
 
-      * Description du fichier de sortie
+      * Description de l’enregistrement de sortie
        FD FICHIER-GENS-WRITE.
        01 FS-ENR-GENS-WRITE.
            05 FS-PRENOM-WRITE        PIC X(12).
@@ -46,17 +47,17 @@
 
        WORKING-STORAGE SECTION.
 
-      * Zone de travail contenant les 10 lignes en mémoire
+      * Table pour stocker les agents en mémoire
        01 WS-ENR-GENS.
            05 WS-GENS OCCURS 10 TIMES.
                10 WS-PRENOM          PIC X(12).
                10 WS-NOM             PIC X(17).
 
-      * Index utilisé pour lecture et écriture des tableaux
+      * Index de lecture / écriture
        01 WS-IDX-DEB            PIC 9(03)    VALUE 1.
        01 WS-IDX-FIN            PIC 9(03)    VALUE 10.
 
-      * Drapeau pour sortir de la boucle de lecture
+      * Drapeau de fin de fichier
        01 FLAG-STOP             PIC X.
            88 QUITTER                        VALUE 'Y'. 
 
@@ -65,7 +66,7 @@
       * Ouverture du fichier source
            OPEN INPUT FICHIER-GENS.
 
-      * Lecture ligne à ligne du fichier, stockage en mémoire
+      * Lecture séquentielle des 10 lignes dans le tableau
            PERFORM UNTIL QUITTER
                READ FICHIER-GENS
                    AT END 
@@ -79,18 +80,18 @@
                END-READ
            END-PERFORM.
 
-      * Fermeture du fichier après chargement
+      * Fermeture du fichier après lecture
            CLOSE FICHIER-GENS.
 
-      * Affichage de l’en-tête du tableau (console)
+      * Affichage de l’en-tête en console
            DISPLAY "***********************************".
            DISPLAY "|    Prénom    |  Nom de l'agent  |".
            DISPLAY "***********************************".
 
-      * Réinitialisation de l’index pour l’affichage
+      * Réinitialisation de l’index pour affichage normal
            MOVE 1 TO WS-IDX-DEB.
 
-      * Affichage ligne par ligne formatée à l'écran
+      * Affichage des données dans l’ordre de lecture
            PERFORM VARYING WS-IDX-DEB FROM 1 BY 1 
                  UNTIL WS-IDX-DEB > WS-IDX-FIN
                DISPLAY "| " WS-PRENOM(WS-IDX-DEB) 
@@ -103,7 +104,7 @@
       * Ouverture du fichier de sortie
            OPEN OUTPUT FICHIER-GENS-WRITE.
 
-      * Copie des données mémorisées vers le fichier de sortie
+      * Ecriture des lignes en ordre inversé (du 10 au 1)
            PERFORM VARYING WS-IDX-DEB FROM WS-IDX-FIN BY -1 
                UNTIL WS-IDX-DEB < 1
                MOVE WS-PRENOM(WS-IDX-DEB) TO FS-PRENOM-WRITE
@@ -114,5 +115,5 @@
       * Fermeture du fichier de sortie
            CLOSE FICHIER-GENS-WRITE.
 
-      * Fin du traitement
+      * Fin de programme
            STOP RUN.

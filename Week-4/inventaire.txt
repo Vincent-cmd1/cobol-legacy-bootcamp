@@ -1,0 +1,15 @@
+STYLO      3
+GOMME      7
+FEUTRE     0
+AGENDA     3
+TROUSSE    5
+REGLE      0
+DOUBLURE   3
+COLLE      0
+LIVRE     10
+CARNET     7
+PAIRE      5
+CAHIER     0
+MARQUEUR   0
+ETIQUETTE  5
+CRAYON     3
