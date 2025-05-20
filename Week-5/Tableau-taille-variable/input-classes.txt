@@ -1,0 +1,12 @@
+CM1, Lefevre  Pierre
+CM1, Merlin   Marie
+CM1, Roche    Paul
+CM1, Dubois   Sophie
+CM2, Lefevre  Jean
+CM2, Fontaine Claire
+CM2, Martin   Henri
+CM2, Martin   Julie
+CM2, Dufresne Antoine
+CM2, Huitre   Nathalie
+CM2, Pasdidee Louis
+CM2, Lemoine  Marie
