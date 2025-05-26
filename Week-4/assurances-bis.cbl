@@ -17,6 +17,7 @@
        AUTHOR. Anais & Vincent.
 
        ENVIRONMENT DIVISION.
+
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.   
 
@@ -25,7 +26,7 @@
                ORGANIZATION IS LINE SEQUENTIAL.
 
       * Déclaration du fichier de sortie
-           SELECT F-RAPPORT ASSIGN TO "rapport-assurances.dat"
+           SELECT F-RAPPORT ASSIGN TO "rapport-assurances-bis.dat"
                ORGANIZATION IS LINE SEQUENTIAL.
 
        DATA DIVISION.
@@ -34,44 +35,11 @@
       * Description du fichier d'entrée
        FD F-ASSURANCES.
        01 FS-ENR-ASSURANCES.
-           05 FS-CODE-CONTRAT             PIC X(08).
-           05 FILLER                      PIC X(01).
-           05 FS-NOM-CONTRAT              PIC X(14). 
-           05 FILLER                      PIC X(01).
-           05 FS-NOM-PRODUIT              PIC X(14).
-           05 FILLER                      PIC X(01).
-           05 FS-NOM-CLIENT               PIC X(41).
-           05 FILLER                      PIC X(01). 
-           05 FS-STATUT                   PIC X(08).
-           05 FILLER                      PIC X(01). 
-           05 FS-DATE-DEBUT               PIC 9(08).
-           05 FILLER                      PIC X(01). 
-           05 FS-DATE-FIN                 PIC 9(08).
-           05 FILLER                      PIC X(01). 
-           05 FS-MONTANT                  PIC 9(07)V9(02).
-           05 FILLER                      PIC X(01). 
-           05 FS-DEVISE                   PIC X(04).
+           05 FS-LIGNE-ASSURANCE          PIC X(121).
 
        FD F-RAPPORT.
        01 FS-ENR-RAPPORT.
-           05 FS-CODE-CONTRAT-RAP         PIC X(08).
-           05 FILLER                      PIC X(01).
-           05 FS-NOM-CONTRAT-RAP          PIC X(14). 
-           05 FILLER                      PIC X(01).
-           05 FS-NOM-PRODUIT-RAP          PIC X(14).
-           05 FILLER                      PIC X(01).
-           05 FS-NOM-CLIENT-RAP           PIC X(41).
-           05 FILLER                      PIC X(01). 
-           05 FS-STATUT-RAP               PIC X(08).
-           05 FILLER                      PIC X(01). 
-           05 FS-DATE-DEBUT-RAP           PIC X(10).
-           05 FILLER                      PIC X(01). 
-           05 FS-DATE-FIN-RAP             PIC X(10).
-           05 FILLER                      PIC X(01). 
-           05 FS-MONTANT-RAP              PIC 9(07)V9(02).
-           05 FILLER                      PIC X(01). 
-           05 FS-DEVISE-RAP               PIC X(04).
-
+           05 FS-LIGNE-RAPPORT            PIC X(121).
 
        WORKING-STORAGE SECTION.
 
@@ -79,24 +47,7 @@
       * Chaque ligne est un enregistrement complet du fichier
        01 WS-ENR-ASSURANCES.
            05 WS-ASSURANCES OCCURS 36 TIMES.
-             10 WS-CODE-CONTRAT           PIC X(08).
-             10 FILLER                    PIC X(01). 
-             10 WS-NOM-CONTRAT            PIC X(14).
-             10 FILLER                    PIC X(01). 
-             10 WS-NOM-PRODUIT            PIC X(14).
-             10 FILLER                    PIC X(01). 
-             10 WS-NOM-CLIENT             PIC X(41).
-             10 FILLER                    PIC X(01). 
-             10 WS-STATUT                 PIC X(08).
-             10 FILLER                    PIC X(01). 
-             10 WS-DATE-DEBUT             PIC 9(08).
-             10 FILLER                    PIC X(01). 
-             10 WS-DATE-FIN               PIC 9(08).
-             10 FILLER                    PIC X(01). 
-             10 WS-MONTANT                PIC 9(07)V9(02).
-             10 FILLER                    PIC X(01). 
-             10 WS-DEVISE                 PIC X(04).
-             10 FILLER                    PIC X VALUE X"0A". 
+             10 WS-LIGNE-ASSURANCE        PIC X(121).
 
       * Index pour boucle de traitement
        01 WS-IDX                          PIC 9(03)    VALUE 1.
@@ -117,7 +68,8 @@
        01 WS-JOUR                         PIC X(2).
        01 WS-DATE-DEB-FORMATTEE           PIC X(10).
        01 WS-DATE-FIN-FORMATTEE           PIC X(10).
-       01 WS-DATE-TEMP                    PIC X(8).
+       01 WS-DATE-TEMP                    PIC X(121).
+
 
        PROCEDURE DIVISION.
 
@@ -203,24 +155,8 @@
                        SET QUITTER TO TRUE
                    NOT AT END
                        IF WS-IDX <= WS-IDX-FIN
-                           MOVE FS-CODE-CONTRAT 
-                               TO WS-CODE-CONTRAT(WS-IDX)
-                           MOVE FS-NOM-CONTRAT  
-                               TO WS-NOM-CONTRAT(WS-IDX)
-                           MOVE FS-NOM-PRODUIT 
-                               TO WS-NOM-PRODUIT (WS-IDX)
-                           MOVE FS-NOM-CLIENT  
-                               TO WS-NOM-CLIENT(WS-IDX)
-                           MOVE FS-STATUT 
-                               TO WS-STATUT(WS-IDX)
-                           MOVE FS-DATE-DEBUT  
-                               TO WS-DATE-DEBUT(WS-IDX)
-                           MOVE FS-DATE-FIN  
-                               TO WS-DATE-FIN(WS-IDX)
-                           MOVE FS-MONTANT  
-                               TO WS-MONTANT(WS-IDX)
-                           MOVE FS-DEVISE  
-                               TO WS-DEVISE(WS-IDX)
+                           MOVE FS-LIGNE-ASSURANCE 
+                               TO WS-LIGNE-ASSURANCE(WS-IDX)
                            ADD 1 TO WS-IDX     
                        ELSE
                            SET QUITTER TO TRUE
@@ -229,7 +165,6 @@
            END-PERFORM.
        6110-READ-F-ASSURANCES-FIN.
            EXIT.
-
 
       ******************************************************************
       * ÉCRITURE DU FICHIER DE SORTIE POUR LES ÉLÈVES RÉUSSIS
@@ -240,24 +175,7 @@
                IF WS-IDX = 3 OR WS-IDX = 7 
                    PERFORM 7000-FORMATER-DATES-DEB
                       THRU 7000-FORMATER-DATES-FIN
-                       MOVE WS-CODE-CONTRAT(WS-IDX) 
-                           TO FS-CODE-CONTRAT-RAP
-                       MOVE WS-NOM-CONTRAT(WS-IDX)  
-                           TO FS-NOM-CONTRAT-RAP
-                       MOVE WS-NOM-PRODUIT(WS-IDX) 
-                           TO FS-NOM-PRODUIT-RAP
-                       MOVE WS-NOM-CLIENT(WS-IDX)  
-                           TO FS-NOM-CLIENT-RAP
-                       MOVE WS-STATUT(WS-IDX) 
-                           TO FS-STATUT-RAP
-                       MOVE WS-DATE-DEB-FORMATTEE 
-                           TO FS-DATE-DEBUT-RAP
-                       MOVE WS-DATE-FIN-FORMATTEE
-                           TO FS-DATE-FIN-RAP
-                       MOVE WS-MONTANT(WS-IDX)  
-                           TO FS-MONTANT-RAP
-                       MOVE WS-DEVISE(WS-IDX)  
-                           TO FS-DEVISE-RAP
+                   MOVE WS-LIGNE-ASSURANCE(WS-IDX) TO FS-LIGNE-RAPPORT
                    WRITE FS-ENR-RAPPORT
                END-IF
            END-PERFORM.
@@ -272,19 +190,25 @@
       * Il utilise WS-DATE-TEMP pour extraire AAAA MM JJ
       * Puis construit la date JJ/MM/AAAA dans WS-DATE-*-FORMATTEE
        7000-FORMATER-DATES-DEB.
-           MOVE WS-DATE-DEBUT(WS-IDX) TO WS-DATE-TEMP.
-           MOVE WS-DATE-TEMP(1:4) TO WS-ANNEE
-           MOVE WS-DATE-TEMP(5:2) TO WS-MOIS
-           MOVE WS-DATE-TEMP(7:2) TO WS-JOUR
+           MOVE WS-LIGNE-ASSURANCE(WS-IDX) TO WS-DATE-TEMP.
+           MOVE WS-DATE-TEMP(91:4) TO WS-ANNEE
+           MOVE WS-DATE-TEMP(95:2) TO WS-MOIS
+           MOVE WS-DATE-TEMP(97:2) TO WS-JOUR
            STRING WS-JOUR "/" WS-MOIS "/" WS-ANNEE
                INTO WS-DATE-DEB-FORMATTEE
-           
-           MOVE WS-DATE-FIN(WS-IDX) TO WS-DATE-TEMP.
-           MOVE WS-DATE-TEMP(1:4) TO WS-ANNEE
-           MOVE WS-DATE-TEMP(5:2) TO WS-MOIS
-           MOVE WS-DATE-TEMP(7:2) TO WS-JOUR
+           STRING WS-DATE-DEB-FORMATTEE 
+               DELIMITED BY SIZE
+               INTO WS-LIGNE-ASSURANCE(WS-IDX)(91:10)
+
+           MOVE WS-LIGNE-ASSURANCE(WS-IDX) TO WS-DATE-TEMP.
+           MOVE WS-DATE-TEMP(100:4) TO WS-ANNEE
+           MOVE WS-DATE-TEMP(104:2) TO WS-MOIS
+           MOVE WS-DATE-TEMP(106:2) TO WS-JOUR
            STRING WS-JOUR "/" WS-MOIS "/" WS-ANNEE
                INTO WS-DATE-FIN-FORMATTEE.
+           STRING WS-DATE-FIN-FORMATTEE 
+               DELIMITED BY SIZE
+               INTO WS-LIGNE-ASSURANCE(WS-IDX)(100:10)
        7000-FORMATER-DATES-FIN.
            EXIT.
 
@@ -303,7 +227,7 @@
                    " Statut   |"
                    "Deb. contrat|"
                    " Fin contrat|"
-                   " Montant".
+                   " Montant super".
            DISPLAY WS-TIRET.
                
            PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX > WS-IDX-FIN
@@ -311,15 +235,7 @@
                    PERFORM 7000-FORMATER-DATES-DEB
                       THRU 7000-FORMATER-DATES-FIN
         
-                   DISPLAY WS-CODE-CONTRAT(WS-IDX) " | "
-                        WS-NOM-CONTRAT(WS-IDX) " | "
-                        WS-NOM-PRODUIT(WS-IDX) " | "
-                        WS-NOM-CLIENT(WS-IDX) " | "
-                        WS-STATUT(WS-IDX) " | "
-                        WS-DATE-DEB-FORMATTEE " | "
-                        WS-DATE-FIN-FORMATTEE " | "
-                        WS-MONTANT(WS-IDX) " "
-                        WS-DEVISE(WS-IDX)
+                   DISPLAY WS-LIGNE-ASSURANCE(WS-IDX)
                END-IF
            END-PERFORM.
        8000-AFFICHAGE-ASSU-FIN.
