@@ -295,7 +295,7 @@
       * Boucle de traitement pour chaque étudiant
            PERFORM VARYING WS-IDX FROM 1 BY 1 
                                   UNTIL WS-IDX > WS-STUDENT-LGHT
-      * Réinitialisation des accumulateurs pour chaque étudiant                            
+      * Réinitialisation des accumulateurs pour chaque étudiant       
            MOVE 0 TO WS-TOTAL-COEF
            MOVE 0 TO WS-TOTAL-POND
            MOVE 0 TO WS-TOTAL-TEMP
