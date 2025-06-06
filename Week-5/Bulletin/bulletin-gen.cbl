@@ -147,7 +147,7 @@
        PROCEDURE DIVISION.    
       ****************************************************************** 
       ******************************************************************
-      * PROGRAMME PRINCIPAL                                             *
+      * PROGRAMME PRINCIPAL                                            *
       * Orchestration du flux de traitement complet                    *
       * Séquence : Init -> Lecture -> Calculs -> Sortie -> Fin         *
       ******************************************************************
