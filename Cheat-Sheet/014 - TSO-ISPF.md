@@ -79,7 +79,7 @@
 
 ## ✏️ Commandes d'édition ISPF
 
-### Commandes de ligne
+### Commandes de ligne principales
 
 | Commande | Fonction |
 |----------|----------|
@@ -95,18 +95,43 @@
 | `R` | Répétition d'une ligne |
 | `RR` | Répétition bloc (entre 2 RR) |
 
+### Commandes de ligne avancées
+
+| Commande | Fonction |
+|----------|----------|
+| `X` | EXCLUDE - Masquer ligne(s) de l'affichage |
+| `XX` | EXCLUDE bloc (entre 2 XX) |
+| `S` | SHOW - Afficher lignes masquées |
+| `F` | FLIP - Basculer affichage masqué/visible |
+| `TS` | TEXT SPLIT - Séparer ligne à la position curseur |
+| `TF` | TEXT FLOW - Reformater paragraphe |
+| `LC` | LOWER CASE - Convertir en minuscules |
+| `LCLC` | LOWER CASE bloc (entre LCLC) |
+| `UC` | UPPER CASE - Convertir en majuscules |
+| `UCUC` | UPPER CASE bloc (entre UCUC) |
+| `<` | Décalage gauche (comme parenthèse fermante) |
+| `<<` | Décalage bloc gauche |
+| `>` | Décalage droite (comme parenthèse ouvrante) |
+| `>>` | Décalage bloc droite |
+| `=` | Créer ligne identique |
+| `==` | Créer bloc de lignes identiques |
+
 ### Positionnement après copie/déplacement
 - `A` : After (après une ligne)
 - `B` : Before (avant une ligne)
 - `O` : Override (sur une ligne existante)
 
-### Décalage horizontal
+### Décalage horizontal et outils
 - `)` : Décalage 2 colonnes à droite
 - `)5` : Décalage 5 colonnes à droite
 - `))` : Décalage bloc 2 colonnes à droite
 - `(` : Décalage à gauche
+- `((` : Décalage bloc à gauche
 - `COLS` : Afficher règle colonnes
 - `RESET` : Effacer règle colonnes
+- `BNDS` : Afficher/définir limites colonnes
+- `TABS` : Définir tabulations
+- `MASK` : Définir masque de saisie
 
 ---
 
