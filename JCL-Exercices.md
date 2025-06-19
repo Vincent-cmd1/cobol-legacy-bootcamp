@@ -166,20 +166,20 @@ Paramétrer une exécution avec TIME, REGION et PARM dans un contexte de compila
 
 ### Correction (code de Terry)
 ```jcl
-//TESTJOB6  JOB TESTJOB6,MSGCLASS=X,CLASS=A,                      
-//         MSGLEVEL=(1,1),NOTIFY=&SYSUID                       
-//STEP1    EXEC IGYWCL                                            
-//COBOL.SYSIN DD DSN=Z72426.SOURCE.COBOL(HELLOCOB),DISP=SHR,     
+//TESTJOB6     JOB TESTJOB6,MSGCLASS=X,CLASS=A,                      
+//                   MSGLEVEL=(1,1),NOTIFY=&SYSUID                       
+//STEP1        EXEC IGYWCL                                            
+//COBOL.SYSIN  DD DSN=Z72426.SOURCE.COBOL(HELLOCOB),DISP=SHR,     
 //             DCB=(RECFM=FB,LRECL=80,BLKSIZE=800)               
 //LKED.SYSLMOD DD DSN=&SYSUID..LOAD(HELLOCOB),DISP=SHR           
 //****************************************************************
-//* IF RC = 0 THEN                                               
+//             IF RC = 0 THEN                                               
 //****************************************************************
-//RUN      EXEC PGM=HELLOCOB,                                    
-//         TIME=(1,0),REGION=512K,PARM='TEST01,PROD'             
-//STEPLIB  DD DSN=&SYSUID..LOAD,DISP=SHR                         
-//SYSOUT   DD SYSOUT=*                                           
-//         ENDIF
+//RUN          EXEC PGM=HELLOCOB,                                    
+//             TIME=(1,0),REGION=512K,PARM='TEST01,PROD'             
+//STEPLIB      DD DSN=&SYSUID..LOAD,DISP=SHR                         
+//SYSOUT       DD SYSOUT=*                                           
+//             ENDIF
 ```
 
 ### 💡 Explications et astuces
